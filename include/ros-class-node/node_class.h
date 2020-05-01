@@ -1,0 +1,23 @@
+#ifndef __NODE_CLASS_H_
+#define __NODE_CLASS_H_
+
+#include <ros/ros.h>
+#include <std_msgs/Int8.h>
+#include <std_msgs/Bool.h>
+#include <string>
+
+
+// Create node class
+class node_class
+{
+    private:
+        ros::NodeHandle n_;
+        ros::Publisher pub_;
+        ros::Subscriber sub_;
+        int threshold;
+    public:
+        node_class(std::string pub_name, std::string sub_name, int threshold_value);
+        void sub_callback(const std_msgs::Int8::ConstPtr &);
+};
+
+#endif
