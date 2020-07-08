@@ -1,10 +1,11 @@
-#include "ros-class-node/node_class.h"
+#include "ros-class-node/node_class.hpp"
 
 
 // node_class constructor
 node_class::node_class(std::string pub_name, std::string sub_name, int threshold_value)
-: pub_(n_.advertise<std_msgs::Bool>(pub_name, 100)),
-  sub_(n_.subscribe<std_msgs::Int8>(sub_name, 100, & node_class::sub_callback, this)),
+: private_nh_("~"),
+  pub_(relative_nh_.advertise<std_msgs::Bool>(pub_name, 100)),
+  sub_(relative_nh_.subscribe<std_msgs::Int8>(sub_name, 100, & node_class::sub_callback, this)),
   threshold(threshold_value)
 {
     ROS_INFO_STREAM("Node_class initialized!");

@@ -1,4 +1,4 @@
-#include "ros-class-node/node_class.h"
+#include "ros-class-node/node_class.hpp"
 
 
 const std::string RosnodeName = "node_class_server";
