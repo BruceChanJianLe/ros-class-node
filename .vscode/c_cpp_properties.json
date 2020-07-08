@@ -4,7 +4,7 @@
             "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/**",
-                "/opt/ros/kinetic/include/**",
+                "/opt/ros/melodic/include/**",
                 "${workspaceFolder}/include"
             ],
             "defines": [],
