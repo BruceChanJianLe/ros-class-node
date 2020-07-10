@@ -4,24 +4,58 @@
 #include <ros/ros.h>
 #include <std_msgs/Int8.h>
 #include <std_msgs/Bool.h>
+
 #include <string>
 
+#ifdef DEBUG_
+    #include <curses.h>
 
-// Create node class
-class node_class
+#endif
+
+
+namespace NODE_CLASS
 {
-    private:
-        ros::NodeHandle private_nh_;
-        ros::NodeHandle relative_nh_;
-        ros::NodeHandle n_;
-        ros::Publisher pub_;
-        ros::Subscriber sub_;
-        int threshold;
-        bool data_receive;
-        void process_data();
-    public:
-        node_class(std::string pub_name, std::string sub_name, int threshold_value);
-        void sub_callback(const std_msgs::Int8::ConstPtr &);
-};
+
+    // Create node class
+    class node_class
+    {
+        private:
+            // ROS declarations
+            ros::NodeHandle private_nh_;
+            ros::NodeHandle relative_nh_;
+            ros::NodeHandle n_;
+            ros::Publisher pub_;
+            ros::Subscriber sub_;
+            
+            // ROS msg declaration
+            std_msgs::Bool cur_msg_;
+
+            // Variable declarations
+            int threshold_;
+            bool data_receive_;
+            int rate_;
+            int data_;
+
+            // Private function
+            void init();
+            void process_data();
+
+        public:
+            // Constructor
+            node_class(std::string pub_name, std::string sub_name);
+
+            node_class();
+
+            // Destructor
+            ~node_class();
+
+            // subscriber callback function
+            void sub_callback(const std_msgs::Int8::ConstPtr &);
+
+            // Start node_class function
+            void start();
+    };
+
+} // namespace NODE_CLASS
 
 #endif
