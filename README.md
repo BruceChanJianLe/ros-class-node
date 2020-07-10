@@ -3,6 +3,12 @@
 This repo shows an example of rosnode using class. You are able to publish a topic inside a callback function of a subscriber.  
 We will be creating a `data_sender` node and a `node_class` node to recieve the data send by `data_sender` node.
 
+### Explanation
+
+data_sender_node -(/data_sender)-> node_class_server -(/signal_state)->
+
+data_sender_node will publish int from 0 to inf, once the threshold reaches 51 /signal_state will change to true from false.
+
 **Version 1.0**  
 - add in DEBUG_ mode which uses ncurses to display more information of the node.  
 - add private and relative ros node handle (private to load rosparam and relative to subscribe other rosnode)
@@ -27,7 +33,7 @@ catkin_create_pkg ros-class-node roscpp rospy std_msgs message_generation messag
 ├── CMakeLists.txt
 ├── include
 │   └── ros-class-node
-│       └── node_class.h    # node_class header
+│       └── node_class.hpp    # node_class header
 ├── LICENSE
 ├── package.xml
 ├── README.md
