@@ -4,6 +4,9 @@ project(ros-class-node)
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
 
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
@@ -14,6 +17,9 @@ find_package(catkin REQUIRED COMPONENTS
   rospy
   std_msgs
 )
+
+# Include ncurses library for debug mode DEBUG_
+find_package(Curses REQUIRED)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -120,6 +126,8 @@ catkin_package(
 include_directories(
   include
   ${catkin_INCLUDE_DIRS}
+  # ncurses directories
+  ${CURSES_INCLUDE_DIR}
 )
 
 ## Declare a C++ library
@@ -163,6 +171,16 @@ add_executable(data_sender_node
               )
 
 target_link_libraries(data_sender_node ${catkin_LIBRARIES})
+
+add_executable(node_class_debug
+               src/main.cpp
+               src/node_class.cpp
+               )
+
+target_compile_definitions(node_class_debug PRIVATE DEBUG_)
+
+target_link_libraries(node_class_debug ${catkin_LIBRARIES} ${CURSES_LIBRARIES})
+
 #############
 ## Install ##
 #############
