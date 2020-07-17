@@ -29,7 +29,6 @@ namespace NODE_CLASS
             // Initialize window
             win = newwin(13, max_col, 10, 0);
             box(win, 0, 0)
-
         #endif
 
         // Initialize parameters (For ROS params)
