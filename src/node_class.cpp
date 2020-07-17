@@ -23,12 +23,12 @@ namespace NODE_CLASS
             attroff(A_STANDOUT | A_BOLD);
 
             // Obtain max row and column for window
-            int max_row, max_col
+            int max_row, max_col;
             getmaxyx(stdscr, max_row, max_col);
 
             // Initialize window
-            win = newwin(13, max_col, 10, 0);
-            box(win, 0, 0)
+            win = newwin(13, max_col, 7, 0);
+            box(win, 0, 0);
         #endif
 
         // Initialize parameters (For ROS params)
@@ -36,6 +36,11 @@ namespace NODE_CLASS
 
         // Inform user
         ROS_INFO_STREAM("Node_class initialized!");
+
+        #ifdef DEBUG_
+            // Display buffer messages
+            refresh();
+        #endif
     }
 
 
@@ -49,7 +54,10 @@ namespace NODE_CLASS
     // node_class destructor
     node_class::~node_class()
     {
-        ;
+        #ifdef DEBUG_
+            delwin(win);
+            endwin();
+        #endif
     }
 
 
@@ -64,6 +72,11 @@ namespace NODE_CLASS
         // Initialize ROS msg
         cur_msg_.data = false;
 
+        #ifdef DEBUG_
+            mvprintw(2, 0, "threshold:%d", threshold_);
+            mvprintw(3, 0, "publish_rate:%d", rate_);
+        #endif
+
     }
 
 
@@ -74,8 +87,12 @@ namespace NODE_CLASS
         data_ = msg->data;
 
         #ifdef DEBUG_
-            // Display in terminal
-            ROS_INFO_STREAM("Message received!");
+            // // Display in terminal
+            // ROS_INFO_STREAM("Message received!");
+            wattron(win, A_BOLD | A_UNDERLINE);
+            mvwprintw(win, 1, 2, "received data");
+            wattroff(win, A_BOLD | A_UNDERLINE);
+            mvwprintw(win, 2, 2, "data: %d", data_);
         #endif
 
         // Set data_receive_ as true
@@ -106,13 +123,30 @@ namespace NODE_CLASS
     // Process received data
     void node_class::process_data()
     {
+        #ifdef DEBUG_
+            wattron(win, A_BOLD | A_UNDERLINE);
+            mvwprintw(win, 1, 20, "result");
+            wattroff(win, A_BOLD | A_UNDERLINE);
+        #endif
+    
         if(data_receive_)
         {
             if(data_ > threshold_)
+            {
                 cur_msg_.data = true;
+            }
             else
+            {
                 cur_msg_.data = false;
+            }
+            #ifdef DEBUG_
+                mvwprintw(win, 2, 20, "result: %s", (data_ > threshold_) ? "true " : "false");
+            #endif
         }
+
+        #ifdef DEBUG_
+            wrefresh(win);
+        #endif
 
         // Publish data to topic
         pub_.publish(cur_msg_);

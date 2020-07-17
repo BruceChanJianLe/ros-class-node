@@ -7,9 +7,9 @@
 
 #include <string>
 
-// #ifdef DEBUG_
+#ifdef DEBUG_
     #include <ncurses.h>
-// #endif
+#endif
 
 
 namespace NODE_CLASS
@@ -33,11 +33,16 @@ namespace NODE_CLASS
             int threshold_;
             bool data_receive_;
             int rate_;
-            int data_;
+            unsigned int data_;
 
             // Private function
             void init();
             void process_data();
+
+            #ifdef DEBUG_
+                // ncurses window
+                WINDOW * win;
+            #endif
 
         public:
             // Constructor
