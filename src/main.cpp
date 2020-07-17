@@ -9,10 +9,9 @@ int main(int argc, char ** argv)
     ros::init(argc, argv, RosnodeName);
 
     // Create node_class obj
-    node_class my_node("signal_state", "data_sender", 50);
+    NODE_CLASS::node_class my_node("signal_state", "data_sender");
 
-    // Let ros do its thing
-    ros::spin();
+    my_node.start();
 
     return 0;
 }
