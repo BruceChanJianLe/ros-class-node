@@ -15,6 +15,7 @@ We will be creating a `data_sender` node and a `node_class` node to recieve the 
 **Create a catkin package**
 
 ```bash
+sudo apt-get install libncurses5-dev
 catkin_create_pkg ros-class-node roscpp rospy std_msgs message_generation message_runtime
 ```
 
