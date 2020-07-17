@@ -8,6 +8,28 @@ node_class::node_class(std::string pub_name, std::string sub_name, int threshold
   sub_(relative_nh_.subscribe<std_msgs::Int8>(sub_name, 100, & node_class::sub_callback, this)),
   threshold(threshold_value)
 {
+    #ifdef DEBUG_
+        // Initializes the ncurses screen
+        initscr();
+        // Ctrl+c to quit ncurses
+        cbreak();
+        // Do not print user input values
+        noecho();
+
+        // ROS node name
+        attron(A_STANDOUT | A_BOLD);
+        mvprintw(0, 0, "node_class_server");
+        attroff(A_STANDOUT | A_BOLD);
+
+        // Obtain max row and column for window
+        int max_row, max_col
+        getmaxyx(stdscr, max_row, max_col);
+
+        // Initialize window
+        win = newwin(13, max_col, 10, 0);
+        box(win, 0, 0)
+
+    #endif
     ROS_INFO_STREAM("Node_class initialized!");
 }
 

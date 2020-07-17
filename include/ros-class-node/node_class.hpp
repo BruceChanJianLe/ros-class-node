@@ -6,6 +6,10 @@
 #include <std_msgs/Bool.h>
 #include <string>
 
+// #ifdef DEBUG_
+    #include <ncurses.h>
+// #endif
+
 
 // Create node class
 class node_class
