@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<launch>
+
+    <!-- Obtain value for DEBUG_ variable -->
+    <arg name="DEBUG_" default="false"/>
+
+    <!-- Debug mode -->
+    <group if="$(arg DEBUG_)">
+
+        <node pkg="ros-class-node" type="node_class_debug" name="node_class_debug" output="screen">
+
+            <rosparam command="load" file="$(find ros-class-node)/config/params.yaml"/>
+
+        </node>
+    
+    </group>
+
+    <!-- Normal mode -->
+    <group unless="$(arg DEBUG_)">
+
+        <node pkg="ros-class-node" type="node_class" name="node_class" output="screen">
+
+            <rosparam command="load" file="$(find ros-class-node)/config/params.yaml"/>
+
+        </node>
+    
+    </group>
+
+</launch>

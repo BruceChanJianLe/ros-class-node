@@ -7,12 +7,13 @@ We will be creating a `data_sender` node and a `node_class` node to recieve the 
 
 data_sender_node -(/data_sender)-> node_class_server -(/signal_state)->
 
-data_sender_node will publish int from 0 to inf, once the threshold reaches 51 /signal_state will change to true from false.
+data_sender_node will publish int from 0 to inf, once the threshold reaches 21 /signal_state will change to true from false.
 
 **Version 1.0**  
 - add in DEBUG_ mode which uses ncurses to display more information of the node.  
 - add private and relative ros node handle (private to load rosparam and relative to subscribe other rosnode)
 - add yaml file to load rosparam
+- add launch for normal and debug version of node_class
 - test on Ubuntu 18 with ROS melodic
 
 
