@@ -16,6 +16,8 @@ data_sender_node will publish int from 0 to inf, once the threshold reaches 21 /
 - add launch for normal and debug version of node_class
 - test on Ubuntu 18 with ROS melodic
 
+**Version 2.0**  
+- add google test and rostest
 
 ## Step 1
 
