@@ -58,6 +58,9 @@ namespace NODE_CLASS
 
             // Start node_class function
             void start();
+
+            // For rostest purpose
+            bool threshold_function(const int data);
     };
 
 } // namespace NODE_CLASS

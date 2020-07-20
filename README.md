@@ -10,12 +10,19 @@ data_sender_node -(/data_sender)-> node_class_server -(/signal_state)->
 data_sender_node will publish int from 0 to inf, once the threshold reaches 21 /signal_state will change to true from false.
 
 **Version 1.0**  
+New Features:  
 - add in DEBUG_ mode which uses ncurses to display more information of the node.  
 - add private and relative ros node handle (private to load rosparam and relative to subscribe other rosnode)
 - add yaml file to load rosparam
 - add launch for normal and debug version of node_class
 - test on Ubuntu 18 with ROS melodic
 
+**Version 2.0**  
+New Features:  
+- add google test and rostest  
+Future Work:  
+- For now note that there is no way to load rosparam into your class
+- In the future, may plan to move out the public methods that is used for testing into another class rather than making it as a public method in the same class
 
 ## Step 1
 
