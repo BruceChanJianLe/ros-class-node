@@ -1,12 +1,6 @@
 <?xml version="1.0"?>
 <launch>
 
-    <test pkg="ros-class-node" type="node_class_utest" test-name="node_class_utest">
-        
-        <rosparam>
-            m_threshold: 20
-        </rosparam>
-
-    </test>
+    <test pkg="ros-class-node" type="node_class_utest" test-name="node_class_utest"/>
 
 </launch>
