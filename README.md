@@ -1,4 +1,4 @@
-# ROS Class Node Version 1.0
+# ROS Class Node
 
 This repo shows an example of rosnode using class. You are able to publish a topic inside a callback function of a subscriber.  
 We will be creating a `data_sender` node and a `node_class` node to recieve the data send by `data_sender` node.
