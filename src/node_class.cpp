@@ -47,7 +47,8 @@ namespace NODE_CLASS
     // node_class constructor
     node_class::node_class()
     {
-        return;
+        // Initialize parameters (For ROS params)
+        init();
     }
 
 
@@ -131,16 +132,9 @@ namespace NODE_CLASS
     
         if(data_receive_)
         {
-            if(data_ > threshold_)
-            {
-                cur_msg_.data = true;
-            }
-            else
-            {
-                cur_msg_.data = false;
-            }
+            cur_msg_.data = threshold_function(data_);
             #ifdef DEBUG_
-                mvwprintw(win, 2, 20, "result: %s", (data_ > threshold_) ? "true " : "false");
+                mvwprintw(win, 2, 20, "result: %s", (cur_msg_.data) ? "true " : "false");
             #endif
         }
 
@@ -151,4 +145,18 @@ namespace NODE_CLASS
         // Publish data to topic
         pub_.publish(cur_msg_);
     }
+
+    // For rostest purpose
+    bool node_class::threshold_function(const int data)
+    {
+        if(data > threshold_)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
 } // namespace NODE_CLASS
