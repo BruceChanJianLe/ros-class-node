@@ -19,7 +19,8 @@ New Features:
 
 **Version 2.0**  
 New Features:  
-- add google test and rostest  
+- add google test and rostest
+
 Future Work:  
 - For now note that there is no way to load rosparam into your class
 - In the future, may plan to move out the public methods that is used for testing into another class rather than making it as a public method in the same class
