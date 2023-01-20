@@ -17,6 +17,7 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
   std_msgs
+  dynamic_reconfigure
 )
 
 # Include ncurses library for debug mode DEBUG_
@@ -101,6 +102,9 @@ find_package(Curses REQUIRED)
 #   cfg/DynReconf1.cfg
 #   cfg/DynReconf2.cfg
 # )
+generate_dynamic_reconfigure_options(
+  cfg/RateChangingNode.cfg
+)
 
 ###################################
 ## catkin specific configuration ##
@@ -185,6 +189,14 @@ add_executable(node_class_debug
 target_compile_definitions(node_class_debug PRIVATE DEBUG_)
 
 target_link_libraries(node_class_debug ${catkin_LIBRARIES} ${CURSES_LIBRARIES})
+
+# Rate changing node
+add_executable(rate_changing_node
+               src/rate_changing_node.cpp
+              )
+
+add_dependencies(rate_changing_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(rate_changing_node ${catkin_LIBRARIES})
 
 #############
 ## Install ##
